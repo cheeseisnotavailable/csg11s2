@@ -14,9 +14,8 @@ public class PageController {
         return "eek";
     }
 
-@GetMapping("/aaa")
-    public String aaa(@RequestParam(name = "show", required=false, defaultValue="") String show, Model model){
-        model.addAttribute("show", show);
-        return "eek";
+    @GetMapping("/testpage")
+    public String testpage(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
+        return "testpage";
     }
 }

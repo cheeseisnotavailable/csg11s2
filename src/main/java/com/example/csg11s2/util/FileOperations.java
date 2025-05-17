@@ -117,7 +117,13 @@ public class FileOperations {
 
     static String pageControllerPath = "/Users/anniezhuang/Documents/csg11s2/src/main/java/com/example/csg11s2/PageController.java";
 
-    public static void writeToController(String contents){
+    public static void writeToController(String title, String requestParam, String attributeName){
+
+        String contentsAsClass = "    @GetMapping(\"/"+ title +"\")\n" +
+                "    public String "+ title +"(@RequestParam("+requestParam+") String "+attributeName+", Model model){\n" +
+//                "        model.addAttribute(\"show\", show);\n" +
+                "        return \""+ title +"\";\n" +
+                "    }";
 
         ArrayList<String> listOfFile = new ArrayList<String>();
         String line = "";
@@ -133,7 +139,7 @@ public class FileOperations {
 
         try {
             listOfFile.remove(listOfFile.size()-1);
-            listOfFile.add(contents);
+            listOfFile.add(contentsAsClass);
             try (FileWriter writer = new FileWriter(pageControllerPath)) {
                 for (String l : listOfFile) {
                     writer.append(l);
