@@ -1,21 +1,34 @@
 package com.example.csg11s2.framework;
 
+import static com.example.csg11s2.util.FileOperations.*;
+
 public class Page {
     protected String title;
     protected String filePath;
     protected String link;
-    protected String contentsTemporary;
     protected String format;
 
-    public Page(String title, String filePath, String link, String contentsTemporary) {
+    public Page(String title, String fileName, String link, String contentsTemporary) {
         this.title = title;
-        this.filePath = filePath;
+        this.filePath = "/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+fileName;
         this.link = link;
-        this.contentsTemporary = contentsTemporary += " ";
+        writeOver(filePath,FormatUnwrapper.unwrapFormat(contentsTemporary, format), title);
     }
 
-    public String display(){
-        return FormatUnwrapper.unwrapFormat(contentsTemporary, format);
+    public String toString(){
+        return fileToString(filePath);
+    }
+
+    public void display(){
+        printFile(filePath);
+    }
+
+    public void addToPage(String newContent){
+        addToFile(filePath,newContent);
+    }
+
+    public void rewritePage(String newContent){
+        writeOver(filePath,newContent);
     }
 
     public String getFormat(){
@@ -34,10 +47,6 @@ public class Page {
         return link;
     }
 
-    public String getContentsTemporary() {
-        return contentsTemporary;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -50,7 +59,4 @@ public class Page {
         this.link = link;
     }
 
-    public void setContentsTemporary(String contentsTemporary) {
-        this.contentsTemporary = contentsTemporary;
-    }
 }

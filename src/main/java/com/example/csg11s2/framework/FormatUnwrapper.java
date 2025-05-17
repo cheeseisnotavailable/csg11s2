@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.example.csg11s2.util.MyQueue;
 
 public class FormatUnwrapper {
+
     public static String unwrapFormat(String contents, String format){
         MyQueue newLineIndices = new MyQueue();
         MyQueue tagIndices = new MyQueue();
