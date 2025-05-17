@@ -8,14 +8,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PageController {
 
+    @GetMapping("/menu")
+    public String main(String att, Model model){
+        model.addAttribute("att", att);
+        return "menu";
+    }
+
     @GetMapping("/eek")
     public String eek(@RequestParam(name = "show", required=false, defaultValue="") String show, Model model){
         model.addAttribute("show", show);
         return "eek";
     }
 
-    @GetMapping("/testpage")
-    public String testpage(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
-        return "testpage";
+    @GetMapping("/bagels")
+    public String bagels(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
+        return "bagels";
+    }
+    @GetMapping("/cheese")
+    public String cheese(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
+        return "cheese";
+    }
+    @GetMapping("/goose")
+    public String goose(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
+        return "goose";
     }
 }

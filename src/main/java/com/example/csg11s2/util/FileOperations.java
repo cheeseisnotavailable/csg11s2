@@ -50,7 +50,7 @@ public class FileOperations {
             writer.append("<head>\n" +
                     "    <title>"+title+"</title>\n" +
                     "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
-                    "</head>\n<body>");
+                    "</head>\n<body>\n<a href=\"/menu\">Menu</a>\n");
             writer.append(newContent);
             writer.append("</body></html>");
         } catch (IOException e) {
@@ -153,6 +153,37 @@ public class FileOperations {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static void writeToMenu(String title){
+        ArrayList<String> listOfFile = new ArrayList<String>();
+        String line = "";
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/menu.html"));
+            while ((line = br.readLine()) != null) {
+                listOfFile.add(line);
+            }
+        } catch (IOException e) {
+            IBIO.output("Exception!");
+        }
+
+        try {
+            listOfFile.remove(listOfFile.size()-1);
+            listOfFile.remove(listOfFile.size()-1);
+            listOfFile.add("<p> <a href=/"+title+"> "+title+"</a> </p>");
+            try (FileWriter writer = new FileWriter("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/menu.html")) {
+                for (String l : listOfFile) {
+                    writer.append(l);
+                    writer.append("\n");
+                }
+                writer.append("</body>\n</html>");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

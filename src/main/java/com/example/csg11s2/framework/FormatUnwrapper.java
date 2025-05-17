@@ -11,34 +11,11 @@ public class FormatUnwrapper {
         MyQueue tagIndices = new MyQueue();
         String[] paragraphs = contents.split("\n");
 
-
-//        for(int i = 0; i<contents.length(); i++){
-//            if(contents.charAt(i) == '~'){
-//                newLineIndices.enqueue(i);
-//            }
-//        }
-//
-//        newLineIndices.enqueue(contents.length());
-//
-//        ArrayList<String> paragraphs = new ArrayList<>();
-//        int lastParagraphIndex = 0;
-//        int currIndex;
-//
-//        while(!newLineIndices.isEmpty()){
-//            currIndex = newLineIndices.dequeue();
-//            paragraphs.add(contents.substring(lastParagraphIndex,currIndex));
-//            lastParagraphIndex = currIndex;
-//        }
-//        paragraphs.add(contents.substring(lastParagraphIndex));
-
-
         String ret = "";
-        int lastTagIndex;
         String lastTag;
         int startingRetLength;
 
         for(String p:paragraphs){
-            lastTagIndex = 0;
             lastTag = "";
             startingRetLength = ret.length();
             p = "<p>"+p+"</p> ";
@@ -58,7 +35,6 @@ public class FormatUnwrapper {
                     }
                     ret += "</" + lastTag + ">";
                     i = j;
-                    lastTagIndex = j;
                 }else{
                     ret += p.charAt(i);
                     j=i;
