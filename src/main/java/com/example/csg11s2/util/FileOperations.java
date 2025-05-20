@@ -52,15 +52,20 @@ public class FileOperations {
 
     }
 
-    public static void writeOver(String fileName, String newContent, String title){
+    public static void writeOverHtml(String filePath, String newContent, String title){
 
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (FileWriter writer = new FileWriter(filePath)) {
             writer.append(htmlHeader);
             writer.append("<head>\n" +
                     "    <title>"+title+"</title>\n" +
                     "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
                     "</head>\n<body>\n<a href=\"/menu\">Menu</a>\n");
             writer.append(newContent);
+            writer.append("<p> <form action=\"/bagels/{content}\" method=\"post\">\n" +
+                    "    <label for=\"content\">Edit:</label>\n" +
+                    "    <p contenteditable=\"true\" id=\"content\" name=\"content\">This is some editable content on the page. Click here to edit this text directly!</p>\n" +
+                    "    <button type=\"submit\">Update</button> </p>\n" +
+                    "</form>");
             writer.append("</body></html>");
         } catch (IOException e) {
             e.printStackTrace();
@@ -184,7 +189,7 @@ public class FileOperations {
     // Function to add HTML file to the database
     public static void addHtmlFile(String title, String content) {
         htmlFileDatabase.put(title, content);
-        writeOver(title + ".html", content, title); // Save to file
+        writeOverHtml(title + ".html", content, title); // Save to file
         writeToMenu(title); // Update menu
     }
 

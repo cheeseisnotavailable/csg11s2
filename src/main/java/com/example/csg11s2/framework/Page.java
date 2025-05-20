@@ -17,7 +17,7 @@ public class Page {
             allTitles.add(title);
             this.title = title;
             this.filePath = "/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html";
-            writeOver(filePath, FormatUnwrapper.unwrapFormat(contentsTemporary, format), title);
+            writeOverHtml(filePath, FormatUnwrapper.unwrapFormat(contentsTemporary, format), title);
             writeToController(title, "name = \"show\", required=false, defaultValue=\"\"", "attName");
             writeToMenu(title);
             allPages.add(this);

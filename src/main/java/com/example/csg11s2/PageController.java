@@ -1,11 +1,10 @@
 package com.example.csg11s2;
 
+import com.example.csg11s2.util.FileOperations;
 import com.example.csg11s2.util.FormatUnwrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import static com.example.csg11s2.util.FileOperations.writeOver;
 
 @Controller
 public class PageController {
@@ -22,7 +21,7 @@ public class PageController {
 
     @PostMapping("/bagels/{content}")
     public String updateBagels(@PathVariable("content") String content){
-        writeOver("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(content.toString(), ""), "bagels");
+        FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(content.toString(), ""), "bagels");
         return "bagels";
     }
 
