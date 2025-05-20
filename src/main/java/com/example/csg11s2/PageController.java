@@ -1,9 +1,11 @@
 package com.example.csg11s2;
 
+import com.example.csg11s2.util.FormatUnwrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import static com.example.csg11s2.util.FileOperations.writeOver;
 
 @Controller
 public class PageController {
@@ -14,22 +16,23 @@ public class PageController {
         return "menu";
     }
 
-    @GetMapping("/eek")
-    public String eek(@RequestParam(name = "show", required=false, defaultValue="") String show, Model model){
-        model.addAttribute("show", show);
-        return "eek";
-    }
-
     @GetMapping("/bagels")
     public String bagels(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
+        return "bagels";}
+
+    @PostMapping("/bagels/{content}")
+    public String updateBagels(@PathVariable("content") String content){
+        writeOver("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(content.toString(), ""), "bagels");
         return "bagels";
     }
+
     @GetMapping("/cheese")
     public String cheese(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
-        return "cheese";
-    }
+        return "cheese";}
     @GetMapping("/goose")
     public String goose(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
-        return "goose";
-    }
+        return "goose";}
+    @GetMapping("/dollshouse")
+    public String dollshouse(@RequestParam(name = "show", required=false, defaultValue="") String attName, Model model){
+        return "dollshouse";}
 }

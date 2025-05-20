@@ -9,4 +9,13 @@
 <p>I <b>like</b> cheese and bagels </p>
 <p>I <i>like</i> <sub>cheese</sub> </p>
 <p>I <sup>like</sup> cheese</p>
+
+<!-- Form to send a POST request -->
+<form action="/bagels/{content}" method="post">
+    <label for="content">Edit:</label>
+    <p contenteditable="true" id="content" name="content">This is some editable content on the page. Click here to edit this text directly!</p>
+    <button type="submit">Update</button>
+</form>
+
+
 </body></html>

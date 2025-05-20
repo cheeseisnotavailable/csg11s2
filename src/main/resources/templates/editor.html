@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, p {
+      margin-bottom: 10px;
+    }
+    [contenteditable="true"] {
+      border: 1px;
+      padding: 5px;
+    }
+    [contenteditable="true"]:focus {
+      outline: none;
+      border: 1px;
+      background-color: #f9f9f9;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1 contenteditable="true">Editable Page Title</h1>
+<p contenteditable="true">This is some editable content on the page. Click here to edit this text directly!</p>
+<p contenteditable="true">Feel free to change this as well. Your edits are live on the page!</p>
+<button onclick="saveContent()">Save Changes</button>
+
+<script>
+  function saveContent() {
+    // Get the current HTML of the page
+    const pageContent = document.documentElement.innerText;
+
+    // Create a Blob object with the HTML content
+    const blob = new Blob([pageContent], { type: 'text/html' });
+
+    // Create a download link
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = document.documentElement.title+'.html'; // File name for the downloaded file
+
+    // Simulate a click on the link to trigger the download
+    link.click();
+
+    // Clean up the URL object
+    URL.revokeObjectURL(link.href);
+  }
+</script>
+</body>
+</html>

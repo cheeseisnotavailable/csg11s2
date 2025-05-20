@@ -1,5 +1,7 @@
 package com.example.csg11s2.util;
 
+import com.example.csg11s2.framework.Page;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,8 +11,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FileOperations {
+
+    // Simulated database for HTML files
+    private static Map<String, String> htmlFileDatabase = new HashMap<>();
 
     //Read a file from the path and return it
     public static String readFile(String path){
@@ -22,7 +30,7 @@ public class FileOperations {
             BufferedReader reader = Files.newBufferedReader(file, charset);
             String line = reader.readLine();
             while (line != null) {
-                data+=(line);
+                data+=(line+"\n");
                 line = reader.readLine();
             }
         } catch (IOException x) {
@@ -33,6 +41,7 @@ public class FileOperations {
 
     static String htmlHeader = "<!DOCTYPE HTML>\n" + "<html xmlns:th=\"http://www.thymeleaf.org\">\n";
 
+    //TODO: FilePath!!!!
     public static void writeOver(String fileName, String newContent){
 
         try (FileWriter writer = new FileWriter(fileName)) {
@@ -89,20 +98,6 @@ public class FileOperations {
         }
     }
 
-    public static String fileToString(String fileName){
-        String line = "";
-        String ret = "";
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            while ((line = br.readLine()) != null) {
-                ret += line +"\n";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ret;
-    }
-
     public static void printFile(String fileName){
         String line = "";
         try {
@@ -116,14 +111,14 @@ public class FileOperations {
     }
 
     static String pageControllerPath = "/Users/anniezhuang/Documents/csg11s2/src/main/java/com/example/csg11s2/PageController.java";
+    static String menuPath = "/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/menu.html";
 
     public static void writeToController(String title, String requestParam, String attributeName){
 
         String contentsAsClass = "    @GetMapping(\"/"+ title +"\")\n" +
                 "    public String "+ title +"(@RequestParam("+requestParam+") String "+attributeName+", Model model){\n" +
 //                "        model.addAttribute(\"show\", show);\n" +
-                "        return \""+ title +"\";\n" +
-                "    }";
+                "        return \""+ title +"\";}";
 
         ArrayList<String> listOfFile = new ArrayList<String>();
         String line = "";
@@ -186,5 +181,101 @@ public class FileOperations {
         }
     }
 
+    // Function to add HTML file to the database
+    public static void addHtmlFile(String title, String content) {
+        htmlFileDatabase.put(title, content);
+        writeOver(title + ".html", content, title); // Save to file
+        writeToMenu(title); // Update menu
+    }
+
+    // Function to delete HTML file from the database and filesystem
+    public static void deleteHtmlFile(String title) {
+        htmlFileDatabase.remove(title);
+        deleteFile(title + ".html"); // Delete from filesystem
+    }
+
+    // Function to delete a file from the filesystem
+    //TODO: this doesn't work
+    public static void deleteFile(String fileName) {
+        try {
+            Files.deleteIfExists(Path.of(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void removeReferencesFromFile(String title, String filePath) {
+        List<String> listOfFile = new ArrayList<>();
+        String line = "";
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((line = br.readLine()) != null) {
+                if (!line.contains(title)) {
+                    listOfFile.add(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Write the updated controller back to the file
+        try (FileWriter writer = new FileWriter(filePath)) {
+            for (String l : listOfFile) {
+                writer.append(l);
+                writer.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void deleteReferencesToPage(Page page){
+        removeReferencesFromFile(page.getTitle(), menuPath);
+        removeReferencesFromFile(page.getTitle(), pageControllerPath);
+        deleteFile(page.getTitle());
+    }
+
+    public static void standardFileWrite(String[] contents, String filepath){
+        try (FileWriter writer = new FileWriter(filepath)) {
+            for (String l : contents) {
+                writer.append(l);
+                writer.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addPreexistingPagesFromMenu(){
+        List<String> listOfFile = new ArrayList<>();
+        String line = "";
+        String title;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(menuPath));
+            while ((line = br.readLine()) != null) {
+                title = "";
+                if (line.contains("<a href=")) {
+                    for(int i=13; i<line.length(); i++){
+                        if(line.charAt(i) == '>'){
+                            i = 10000;
+                        }else{
+                            title += line.charAt(i);
+                        }
+                    }
+                    Page.addPage(title);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String returnHtmlContents(String title){
+        return readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html");
+    }
 
 }
