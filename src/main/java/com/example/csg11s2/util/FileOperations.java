@@ -61,7 +61,7 @@ public class FileOperations {
                     "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
                     "</head>\n<body>\n<a href=\"/menu\">Menu</a>\n");
             writer.append(newContent);
-            writer.append("<p> <form action=\"/bagels/{content}\" method=\"post\">\n" +
+            writer.append("<p> <form action=\"/bagels\" method=\"post\">\n" +
                     "    <label for=\"content\">Edit:</label>\n" +
                     "    <p> <input id=\"content\" name=\"content\" th:text=\"${content}\">This is some editable content on the page. Click here to edit this text directly!</p>\n" +
                     "    <button type=\"submit\">Update</button>\n" +
