@@ -6,38 +6,40 @@
 </head>
 <body>
 <a href="/menu">Menu</a>
-<p><i>[SCENE.—A room furnished comfortably and tastefully, but not extravagantly. At the back, a door to the right leads to the entrance-hall, another to the left leads to Helmer’s study. Between the doors stands a piano. In the middle of the left-hand wall is a door, and beyond it a window. Near the window are a round table, arm-chairs and a small sofa. In the right-hand wall, at the farther end, another door; and on the same side, nearer the footlights, a stove, two easy chairs and a rocking-chair; between the stove and the door, a small table. Engravings on the walls; a cabinet with china and other small objects; a small book-case with well-bound books. The floors are carpeted, and a fire burns in the stove. It is winter.</i></p>
-<p></p>
-<p>A bell rings in the hall; shortly afterwards the door is heard to open. Enter NORA, humming a tune and in high spirits. She is in outdoor dress and carries a number of parcels; these she lays on the table to the right. She leaves the outer door open after her, and through it is seen a PORTER who is carrying a Christmas Tree and a basket, which he gives to the MAID who has opened the door.]</p>
-<p></p>
-<p>NORA.</p>
-<p>Hide the Christmas Tree carefully, Helen. Be sure the children do not see it until this evening, when it is dressed. <i>[To the PORTER, taking out her purse.]</i> How much?</p>
-<p></p>
-<p>PORTER.</p>
-<p>Sixpence.</p>
-<p></p>
-<p>NORA.</p>
-<p>There is a shilling. No, keep the change. <i>[The PORTER thanks her, and goes out. NORA shuts the door. She is laughing to herself, as she takes off her hat and coat. She takes a packet of macaroons from her pocket and eats one or two; then goes cautiously to her husband’s door and listens.]</i> Yes, he is in. <i>[Still humming, she goes to the table on the right.]</i></p>
-<p></p>
-<p>HELMER.</p>
-<p><i>[calls out from his room]</i>. Is that my little lark twittering out there?</p>
-<p></p>
-<p>NORA.</p>
-<p><i>[busy opening some of the parcels]</i>. Yes, it is!</p>
-<p></p>
-<p>HELMER.</p>
-<p>Is it my little squirrel bustling about?</p>
-<p></p>
-<p>NORA.</p>
-<p>Yes!</p>
-<p></p>
-<p>HELMER.</p>
-<p>When did my squirrel come home?</p>
-<p></p>
-<p>NORA.</p>
-<p>Just now. <i>[Puts the bag of macaroons into her pocket and wipes her mouth.]</i> Come in here, Torvald, and see what I have bought.</p>
-<p> <form action="/bagels/{content}" method="post">
+<p>+i[SCENE.—A room furnished comfortably and tastefully, but not extravagantly. At the back, a door to the right leads to the entrance-hall, another to the left leads to Helmer’s study. Between the doors stands a piano. In the middle of the left-hand wall is a door, and beyond it a window. Near the window are a round table, arm-chairs and a small sofa. In the right-hand wall, at the farther end, another door; and on the same side, nearer the footlights, a stove, two easy chairs and a rocking-chair; between the stove and the door, a small table. Engravings on the walls; a cabinet with china and other small objects; a small book-case with well-bound books. The floors are carpeted, and a fire burns in the stove. It is winter.+
+
+A bell rings in the hall; shortly afterwards the door is heard to open. Enter NORA, humming a tune and in high spirits. She is in outdoor dress and carries a number of parcels; these she lays on the table to the right. She leaves the outer door open after her, and through it is seen a PORTER who is carrying a Christmas Tree and a basket, which he gives to the MAID who has opened the door.]
+
+NORA.
+Hide the Christmas Tree carefully, Helen. Be sure the children do not see it until this evening, when it is dressed. +i[To the PORTER, taking out her purse.]+ How much?
+
+PORTER.
+Sixpence.
+
+NORA.
+There is a shilling. No, keep the change. +i[The PORTER thanks her, and goes out. NORA shuts the door. She is laughing to herself, as she takes off her hat and coat. She takes a packet of macaroons from her pocket and eats one or two; then goes cautiously to her husband’s door and listens.]+ Yes, he is in. +i[Still humming, she goes to the table on the right.]+
+
+HELMER.
++i[calls out from his room]+. Is that my little lark twittering out there?
+
+NORA.
++i[busy opening some of the parcels]+. Yes, it is!
+
+HELMER.
+Is it my little squirrel bustling about?
+
+NORA.
+Yes!
+
+HELMER.
+When did my squirrel come home?
+
+NORA.
+Just now. +i[Puts the bag of macaroons into her pocket and wipes her mouth.]+ Come in here, Torvald, and see what I have bought.
+
+</p>
+<p> <form action="/dollshouse" method="post">
     <label for="content">Edit:</label>
-    <p contenteditable="true" id="content" name="content">This is some editable content on the page. Click here to edit this text directly!</p>
+    <input id="content" name="content" th:text="${content}">
     <button type="submit">Update</button>
 </form> </p></body></html>

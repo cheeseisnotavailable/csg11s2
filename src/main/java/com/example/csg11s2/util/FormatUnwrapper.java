@@ -1,17 +1,26 @@
 package com.example.csg11s2.util;
 
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
 public class FormatUnwrapper {
 
     public static String unwrapFormat(String contents, String format){
         MyQueue newLineIndices = new MyQueue();
         MyQueue tagIndices = new MyQueue();
-        String[] paragraphs = contents.split("\n");
+        String[] paragraphs = contents.split("^");
 
         String ret = "";
+        int lastTagIndex;
         String lastTag;
         int startingRetLength;
 
         for(String p:paragraphs){
+            lastTagIndex = 0;
             lastTag = "";
             startingRetLength = ret.length();
             p = "<p>"+p+"</p> ";
@@ -20,15 +29,18 @@ public class FormatUnwrapper {
             int j = 0;
             for(int i = 0; i<p.length()-1; i++){
                 if(p.charAt(i) == '+'){
+//                    ret += p.substring(lastTagIndex, i);
+                    //TODO: MAKE THIS A LOOKUP
                     lastTag = replaceWithHtmlTag(p.charAt(i+1));
                     ret += "<" + lastTag + ">";
-                    j = i+2;
+                    j = i+1;
                     while(p.charAt(j) != '+' && j<p.length()){
                         ret += p.charAt(j);
                         j++;
                     }
                     ret += "</" + lastTag + ">";
                     i = j;
+                    lastTagIndex = j;
                 }else{
                     ret += p.charAt(i);
                     j=i;
@@ -47,6 +59,7 @@ public class FormatUnwrapper {
 
     public static String wrapFormat(String htmlContents, String format) {
         htmlContents.substring(0,htmlContents.indexOf("<form"));
+        htmlContents.replace("+"," ");
         StringBuilder ret = new StringBuilder();
         String[] paragraphs = htmlContents.split("<p>");
         String paragraph;
@@ -77,7 +90,7 @@ public class FormatUnwrapper {
                     String content = paragraph.substring(closingTagStart + 1, closingTagEnd).trim();
 
                     char azTag = replaceWithAzTag(tag);
-                    formattedParagraph.append("+").append(azTag).append(content).append("+");
+                    formattedParagraph.append("~").append(azTag).append(content).append("~");
 
                     i = closingTagEnd + tag.length() + 3; // +3 accounts for "</" and ">"
                 } else {
@@ -89,6 +102,11 @@ public class FormatUnwrapper {
         }
 
         return ret.toString().trim();
+    }
+
+    public static String unwrapWebRepsonse(String webInput){
+        String ret = webInput.replace("+"," ");
+        return unwrapFormat(ret, "");
     }
 
     public static char replaceWithAzTag(String htmlTag) {
@@ -125,5 +143,32 @@ public class FormatUnwrapper {
                 return "sub";
         }
         return azTag+"";
+    }
+
+    public static String decodeURL(String sourceText){
+
+        // Regular expression to match percent-encoded characters (%XX)
+        Pattern pattern = Pattern.compile("%[0-9A-Fa-f]{2}");
+        Matcher matcher = pattern.matcher(sourceText);
+
+        StringBuffer result = new StringBuffer();
+
+        while (matcher.find()) {
+            // Decode the matched percent-encoded substring
+            String encoded = matcher.group();
+            String decoded;
+            try {
+                decoded = URLDecoder.decode(encoded, StandardCharsets.UTF_8.name());
+            } catch (Exception e) {
+                decoded = encoded; // If decoding fails, keep the original
+            }
+            matcher.appendReplacement(result, decoded);
+        }
+
+        // Append the rest of the input string
+        matcher.appendTail(result);
+
+        // Output the final result
+        return result.toString();
     }
 }

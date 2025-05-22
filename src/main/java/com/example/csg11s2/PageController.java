@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.example.csg11s2.util.FormatUnwrapper.decodeURL;
+
 @Controller
 public class PageController {
 
@@ -22,10 +24,7 @@ public class PageController {
 
     @PostMapping("/bagels")
     public String updateBagels(@RequestBody String content){
-        FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(content.substring(8), ""), "bagels");
-        return "bagels";}
+    FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(decodeURL(content), ""), "bagels");
+    return "bagels";}
 
-//    @GetMapping("/bagels/")
-//    public String reBagels(Model model){
-//        return "bagels/";}
 }

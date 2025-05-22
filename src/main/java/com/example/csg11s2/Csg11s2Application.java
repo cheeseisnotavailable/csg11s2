@@ -9,19 +9,18 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
-import static com.example.csg11s2.util.FileOperations.addPreexistingPagesFromMenu;
-import static com.example.csg11s2.util.FileOperations.readFile;
+import static com.example.csg11s2.util.FileOperations.*;
 
 @SpringBootApplication
 public class Csg11s2Application {
 
 	public static void main(String[] args) {
+//		resetProject();
 //		addPreexistingPagesFromMenu();
-//		String contents = "I +blike+ cheese and bagels \nI +ilike+ +dcheese+ \nI +ulike+ cheese";
-//		String contents2 = "I +blike+ cheese, +bnot+ bagels\nI +ihate+ +bbagels+ \nI +uhate+ bagels";
+//		String contents = "I ~b like~ cheese and bagels ^I ~i like+ ~d cheese~ ^I ~u like~ cheese";
+//		String contents2 = "I ~b like~ cheese, ~b not~ bagels^I ~ihate~ ~b bagels~ ^I ~u hate~ bagels";
 //		Page bagelsPage = new Page("bagels", contents);
 //		Page cheesePage = new Page("cheese", contents2);
-//		Page goosePage = new Page("goose", "honk goes the goose \nhonk goes the goose \nhonk goes the goose");
 //		Page dollsHouse = new Page("dollshouse", readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/sourcetext/dollshouse.txt"));
 
 		SpringApplication.run(Csg11s2Application.class, args);

@@ -61,11 +61,11 @@ public class FileOperations {
                     "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
                     "</head>\n<body>\n<a href=\"/menu\">Menu</a>\n");
             writer.append(newContent);
-            writer.append("<p> <form action=\"/bagels\" method=\"post\">\n" +
+            writer.append("<p> <form action=\"/"+title+"\" method=\"post\">\n" +
                     "    <label for=\"content\">Edit:</label>\n" +
-                    "    <p> <input id=\"content\" name=\"content\" th:text=\"${content}\">This is some editable content on the page. Click here to edit this text directly!</p>\n" +
+                    "    <input id=\"content\" name=\"content\" th:text=\"${content}\">\n" +
                     "    <button type=\"submit\">Update</button>\n" +
-                    "</form> </p>\n");
+                    "</form> </p>");
             writer.append("</body></html>");
         } catch (IOException e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class FileOperations {
 
         String postMappingFull = "    @PostMapping(\"/"+title+"/{content}\")\n" +
                 "    public String update"+(title.charAt(0)+"").toUpperCase()+title.substring(1)+"(@PathVariable(\"content\") String content){\n" +
-                "    FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapFormat(content.toString(), \"\"), \""+title+"\");\n" +
+                "    FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapFormat(decodeURL(content), \"\"), \""+title+"\");\n" +
                 "    return \""+title+"\";}\n\n";
 
         ArrayList<String> listOfFile = new ArrayList<String>();

@@ -8,7 +8,7 @@ import static com.example.csg11s2.util.IBIO.*;
 
 public class FrameworkMain {
     public static void main(String[] args) {
-//        resetProject();
+        resetProject();
 //        System.out.println(FormatUnwrapper.wrapFormat(readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html"), ""));
 
 //        addPreexistingPagesFromMenu();

@@ -6,11 +6,11 @@
 </head>
 <body>
 <a href="/menu">Menu</a>
-<p>I <b>like</b> cheese, <b>not</b> bagels</p>
-<p>I <i>hate</i> <b>bagels</b> </p>
-<p>I <sup>hate</sup> bagels</p>
-<p> <form action="/bagels/{content}" method="post">
+<p>I +blike+ cheese, +bnot+ bagels
+I +ihate+ +bbagels+ 
+I +uhate+ bagels</p>
+<p> <form action="/cheese" method="post">
     <label for="content">Edit:</label>
-    <p contenteditable="true" id="content" name="content">This is some editable content on the page. Click here to edit this text directly!</p>
+    <input id="content" name="content" th:text="${content}">
     <button type="submit">Update</button>
 </form> </p></body></html>
