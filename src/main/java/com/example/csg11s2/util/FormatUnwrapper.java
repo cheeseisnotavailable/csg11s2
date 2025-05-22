@@ -12,7 +12,7 @@ public class FormatUnwrapper {
     public static String unwrapFormat(String contents, String format){
         MyQueue newLineIndices = new MyQueue();
         MyQueue tagIndices = new MyQueue();
-        String[] paragraphs = contents.split("^");
+        String[] paragraphs = contents.split("/n");
 
         String ret = "";
         int lastTagIndex;

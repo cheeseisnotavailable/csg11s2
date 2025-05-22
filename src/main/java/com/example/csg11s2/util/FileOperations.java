@@ -125,10 +125,10 @@ public class FileOperations {
 //                "        model.addAttribute(\"show\", show);\n" +
                 "        return \""+ title +"\";}\n";
 
-        String postMappingFull = "    @PostMapping(\"/"+title+"/{content}\")\n" +
-                "    public String update"+(title.charAt(0)+"").toUpperCase()+title.substring(1)+"(@PathVariable(\"content\") String content){\n" +
-                "    FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapFormat(decodeURL(content), \"\"), \""+title+"\");\n" +
-                "    return \""+title+"\";}\n\n";
+        String postMappingFull = "    @PostMapping(\"/"+title+"\")\n" +
+                "    public String update"+(title.charAt(0)+"").toUpperCase()+title.substring(1)+"(@RequestBody String content){\n" +
+                "        FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapFormat(FormatUnwrapper.decodeURL(content.substring(8)), \"\"), \""+title+"\");\n" +
+                "        return \""+title+"\";}\n\n";
 
         ArrayList<String> listOfFile = new ArrayList<String>();
         String line = "";

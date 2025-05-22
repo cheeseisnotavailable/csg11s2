@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import static com.example.csg11s2.util.FormatUnwrapper.decodeURL;
-
 @Controller
 public class PageController {
 
@@ -18,13 +16,14 @@ public class PageController {
     }
 
 
-    @GetMapping("/bagels")
-    public String bagels(Model model){
-        return "bagels";}
 
-    @PostMapping("/bagels")
-    public String updateBagels(@RequestBody String content){
-    FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(decodeURL(content), ""), "bagels");
-    return "bagels";}
+    @GetMapping("/goose")
+    public String goose(Model model){
+        return "goose";}
+
+    @PostMapping("/goose")
+    public String updateGoose(@RequestBody String content){
+        FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/goose.html", FormatUnwrapper.unwrapFormat(FormatUnwrapper.decodeURL(content.substring(8)), ""), "goose");
+        return "goose";}
 
 }
