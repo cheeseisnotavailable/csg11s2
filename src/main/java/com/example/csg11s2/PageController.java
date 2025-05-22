@@ -20,8 +20,8 @@ public class PageController {
     public String bagels(Model model){
         return "bagels";}
 
-    @PostMapping("/bagels")
+    @PostMapping("/bagels/{content}")
     public String updateBagels(@RequestBody String content){
         FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(content.substring(8), ""), "bagels");
-        return "bagels";}
+        return "redirect::/bagels";}
 }
