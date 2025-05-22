@@ -16,12 +16,4 @@ public class PageController {
     }
 
 
-    @GetMapping("/bagels")
-    public String bagels(Model model){
-        return "bagels";}
-
-    @PostMapping("/bagels")
-    public String updateBagels(@RequestBody String content){
-        FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(content.substring(8), ""), "bagels");
-        return "bagels";}
 }

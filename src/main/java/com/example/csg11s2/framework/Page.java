@@ -21,6 +21,7 @@ public class Page {
             writeToController(title, "name = \"show\", required=false, defaultValue=\"\"", "attName");
             writeToMenu(title);
             allPages.add(this);
+            System.out.println(title+" added as page");
         }else{
 //            throw new IllegalArgumentException(title+" ALREADY TAKEN!");
             System.out.println(title+" ALREADY TAKEN!");
@@ -100,5 +101,6 @@ public class Page {
         allTitles.clear();
         allPages.clear();
     }
+
 
 }

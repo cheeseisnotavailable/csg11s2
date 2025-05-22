@@ -9,6 +9,5 @@
 
 
 
-<p> <a href=/bagels> bagels</a> </p>
 </body>
 </html>

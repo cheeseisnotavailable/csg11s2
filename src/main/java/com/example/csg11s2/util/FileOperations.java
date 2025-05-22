@@ -63,9 +63,9 @@ public class FileOperations {
             writer.append(newContent);
             writer.append("<p> <form action=\"/bagels/{content}\" method=\"post\">\n" +
                     "    <label for=\"content\">Edit:</label>\n" +
-                    "    <p contenteditable=\"true\" id=\"content\" name=\"content\">This is some editable content on the page. Click here to edit this text directly!</p>\n" +
-                    "    <button type=\"submit\">Update</button> </p>\n" +
-                    "</form>");
+                    "    <p> <input id=\"content\" name=\"content\" th:text=\"${content}\">This is some editable content on the page. Click here to edit this text directly!</p>\n" +
+                    "    <button type=\"submit\">Update</button>\n" +
+                    "</form> </p>\n");
             writer.append("</body></html>");
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,10 +120,15 @@ public class FileOperations {
 
     public static void writeToController(String title, String requestParam, String attributeName){
 
-        String contentsAsClass = "    @GetMapping(\"/"+ title +"\")\n" +
-                "    public String "+ title +"(@RequestParam("+requestParam+") String "+attributeName+", Model model){\n" +
+        String getMappingFull = "    @GetMapping(\"/"+ title +"\")\n" +
+                "    public String "+ title +"(Model model){\n" +
 //                "        model.addAttribute(\"show\", show);\n" +
-                "        return \""+ title +"\";}";
+                "        return \""+ title +"\";}\n";
+
+        String postMappingFull = "    @PostMapping(\"/"+title+"/{content}\")\n" +
+                "    public String update"+(title.charAt(0)+"").toUpperCase()+title.substring(1)+"(@PathVariable(\"content\") String content){\n" +
+                "    FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapFormat(content.toString(), \"\"), \""+title+"\");\n" +
+                "    return \""+title+"\";}\n\n";
 
         ArrayList<String> listOfFile = new ArrayList<String>();
         String line = "";
@@ -139,12 +144,13 @@ public class FileOperations {
 
         try {
             listOfFile.remove(listOfFile.size()-1);
-            listOfFile.add(contentsAsClass);
+            listOfFile.add(getMappingFull);
             try (FileWriter writer = new FileWriter(pageControllerPath)) {
                 for (String l : listOfFile) {
                     writer.append(l);
                     writer.append("\n");
                 }
+                writer.append(postMappingFull);
                 writer.append("}");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -254,6 +260,7 @@ public class FileOperations {
         }
     }
 
+    //TODO: THIS DOESN'T WORK
     public static void addPreexistingPagesFromMenu(){
         List<String> listOfFile = new ArrayList<>();
         String line = "";
@@ -281,6 +288,12 @@ public class FileOperations {
 
     public static String returnHtmlContents(String title){
         return readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html");
+    }
+
+    public static void resetProject(){
+        writeOver(pageControllerPath, readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/sourcetext/pagecontrollertemplate"));
+        writeOver(menuPath, readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/sourcetext/menutemplate.txt"));
+        System.out.println("Project reset.");
     }
 
 }
