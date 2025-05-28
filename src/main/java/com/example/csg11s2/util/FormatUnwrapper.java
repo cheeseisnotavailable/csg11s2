@@ -30,10 +30,9 @@ public class FormatUnwrapper {
             for(int i = 0; i<p.length()-1; i++){
                 if(p.charAt(i) == '+'){
 //                    ret += p.substring(lastTagIndex, i);
-                    //TODO: MAKE THIS A LOOKUP
                     lastTag = replaceWithHtmlTag(p.charAt(i+1));
                     ret += "<" + lastTag + ">";
-                    j = i+1;
+                    j = i+2;
                     while(p.charAt(j) != '+' && j<p.length()){
                         ret += p.charAt(j);
                         j++;

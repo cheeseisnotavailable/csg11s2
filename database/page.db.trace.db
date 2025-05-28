@@ -1,0 +1,2 @@
+2025-05-28 21:53:27.936850+08:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "dbtest" [22018-232]

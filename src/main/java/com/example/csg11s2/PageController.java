@@ -17,13 +17,13 @@ public class PageController {
 
 
 
-    @GetMapping("/goose")
-    public String goose(Model model){
-        return "goose";}
+    @GetMapping("/bagels")
+    public String bagels(Model model){
+        return "bagels";}
 
-    @PostMapping("/goose")
-    public String updateGoose(@RequestBody String content){
-        FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/goose.html", FormatUnwrapper.unwrapFormat(FormatUnwrapper.decodeURL(content.substring(8)), ""), "goose");
-        return "goose";}
+    @PostMapping("/bagels")
+    public String updateBagels(@RequestBody String content){
+        FileOperations.writeOverHtml("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/bagels.html", FormatUnwrapper.unwrapFormat(FormatUnwrapper.decodeURL(content.substring(8)), ""), "bagels");
+        return "bagels";}
 
 }

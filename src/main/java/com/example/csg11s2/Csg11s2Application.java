@@ -24,6 +24,8 @@ public class Csg11s2Application {
 //		Page dollsHouse = new Page("dollshouse", readFile("/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/sourcetext/dollshouse.txt"));
 
 		SpringApplication.run(Csg11s2Application.class, args);
+
+//		SpringApplication.;
 	}
 
 	@Bean

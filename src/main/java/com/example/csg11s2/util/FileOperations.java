@@ -59,7 +59,7 @@ public class FileOperations {
             writer.append("<head>\n" +
                     "    <title>"+title+"</title>\n" +
                     "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
-                    "</head>\n<body>\n<a href=\"/menu\">Menu</a>\n");
+                    "</head>\n<body>\n<h1>"+title.toUpperCase()+"</h1><a href=\"/menu\">Menu</a>\n");
             writer.append(newContent);
             writer.append("<p> <form action=\"/"+title+"\" method=\"post\">\n" +
                     "    <label for=\"content\">Edit:</label>\n" +
@@ -278,7 +278,7 @@ public class FileOperations {
                             title += line.charAt(i);
                         }
                     }
-                    Page.addPage(title);
+//                    Page.addPageFromExistingHTML(title);
                 }
             }
         } catch (IOException e) {
