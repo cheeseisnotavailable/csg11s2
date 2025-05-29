@@ -28,7 +28,7 @@ public class FormatUnwrapper {
 
             int j = 0;
             for(int i = 0; i<p.length()-1; i++){
-                if(p.charAt(i) == '#'){
+                if(p.charAt(i) == '+'){
 //                    ret += p.substring(lastTagIndex, i);
                     lastTag = replaceWithHtmlTag(p.charAt(i+1));
                     ret += "<" + lastTag + ">";
@@ -105,6 +105,7 @@ public class FormatUnwrapper {
 
     public static String unwrapWebRepsonse(String webInput){
         String ret = webInput.replace("+"," ");
+        ret = ret.replace("~","+");
         return unwrapFormat(ret, "");
     }
 

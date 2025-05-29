@@ -3,12 +3,11 @@
 <head>
     <title>cheese</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/Users/anniezhuang/Documents/csg11s2/src/main/resources/static/styles.css}" rel="stylesheet" />
 </head>
 <body>
 <h1>CHEESE</h1><a href="/menu">Menu</a>
-<p>I <b>blike</b> cheese, <b>bnot</b> bagels
-I <i>ihate</i> <b>bbagels</b> 
-I <sup>uhate</sup> bagels</p>
+<p>I <b>like</b> <i>cheese</i></p>
 <p> <form action="/cheese" method="post">
     <label for="content">Edit:</label>
     <input id="content" name="content" th:text="${content}">
