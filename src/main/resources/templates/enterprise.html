@@ -1,16 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>bagels</title>
+    <title>enterprise</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/Users/anniezhuang/Documents/csg11s2/src/main/resources/static/styles.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>BAGELS</h1><a href="/menu">Menu</a>
-<p>I <b>like# cheese and bagels 
-I #ilike# #dcheese# 
-I #ulike# cheese</p> </b>
-<p> <form action="/bagels" method="post">
+<h1>ENTERPRISE</h1><a href="/menu">Menu</a>
+<p></p>
+<p> <form action="/enterprise" method="post">
     <label for="content">Edit:</label>
     <input id="content" name="content" th:text="${content}">
     <button type="submit">Update</button>

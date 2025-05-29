@@ -59,6 +59,7 @@ public class FileOperations {
             writer.append("<head>\n" +
                     "    <title>"+title+"</title>\n" +
                     "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
+                    "    <link th:href=\"@{/Users/anniezhuang/Documents/csg11s2/src/main/resources/static/styles.css}\" rel=\"stylesheet\" />\n"+
                     "</head>\n<body>\n<h1>"+title.toUpperCase()+"</h1><a href=\"/menu\">Menu</a>\n");
             writer.append(newContent);
             writer.append("<p> <form action=\"/"+title+"\" method=\"post\">\n" +
@@ -127,7 +128,7 @@ public class FileOperations {
 
         String postMappingFull = "    @PostMapping(\"/"+title+"\")\n" +
                 "    public String update"+(title.charAt(0)+"").toUpperCase()+title.substring(1)+"(@RequestBody String content){\n" +
-                "        FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapFormat(FormatUnwrapper.decodeURL(content.substring(8)), \"\"), \""+title+"\");\n" +
+                "        FileOperations.writeOverHtml(\"/Users/anniezhuang/Documents/csg11s2/src/main/resources/templates/"+title+".html\", FormatUnwrapper.unwrapWebRepsonse(FormatUnwrapper.decodeURL(content.substring(8))), \""+title+"\");\n" +
                 "        return \""+title+"\";}\n\n";
 
         ArrayList<String> listOfFile = new ArrayList<String>();

@@ -8,6 +8,11 @@
 
 <h1>MENU</h1>
 
+<p> <form action="/menu" method="post">
+    <label for="title">New Title:</label>
+    <input id="title" name="title" th:text="${title}">
+    <button type="submit">Add Page</button>
+</form> </p>
 
 
 </body>
